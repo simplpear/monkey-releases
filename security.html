@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXGYQS69YM"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DXGYQS69YM');</script>
+    <title>Security — MonKey</title>
+    <meta name="description" content="MonKey security overview. Zero telemetry, no keystroke logging, offline free tier. Sandboxed App Store app. Verify with Lulu, Little Snitch, or ReiKey.">
+    <link rel="canonical" href="https://getmonkey.cc/security.html">
+    <meta name="robots" content="index, follow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; color: #ccc; }
+        .content { max-width: 640px; margin: 0 auto; padding: 60px 24px; }
+        h1 { color: #f0f0f0; font-size: 28px; margin-bottom: 8px; }
+        .subtitle { color: #888; font-size: 15px; margin-bottom: 40px; line-height: 1.6; }
+        h2 { color: #f0f0f0; font-size: 18px; margin: 36px 0 12px; }
+        h3 { color: #e0e0e0; font-size: 15px; margin: 20px 0 8px; }
+        p, li { font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+        ul { padding-left: 20px; }
+        a { color: #DB6614; text-decoration: none; }
+        .back { display: inline-block; margin-bottom: 24px; color: #666; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { text-align: left; padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #1a1a1a; }
+        th { color: #aaa; font-weight: 600; }
+        td { color: #888; }
+        code { background: #1a1a1a; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #ccc; }
+        .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0; }
+        .badge-row img { height: 24px; }
+        .highlight-box {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+        .highlight-box h3 { margin-top: 0; }
+        .green { color: #4ade80; }
+        .red { color: #f87171; }
+        .verify-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 12px 0;
+        }
+        .verify-card h4 {
+            color: #f0f0f0;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .verify-card p {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <a href="/" class="back">&larr; Back to MonKey</a>
+        <h1>Security &amp; Privacy</h1>
+        <p class="subtitle">MonKey uses macOS Accessibility permission to detect keyboard layout mismatches and correct text. We understand that requires trust. Here's what the app does &mdash; and how you can verify it yourself.</p>
+
+        <div class="badge-row">
+            <img src="https://img.shields.io/badge/App_Store-Sandboxed-blue?logo=apple" alt="App Store: Sandboxed">
+            <img src="https://img.shields.io/badge/Free_Tier-100%25_Offline-blue" alt="Free Tier: 100% Offline">
+            <img src="https://img.shields.io/badge/Telemetry-None-brightgreen" alt="No Telemetry">
+            <img src="https://img.shields.io/badge/Keylogging-None-brightgreen" alt="No Keylogging">
+        </div>
+
+        <h2>App Store &amp; Sandboxing</h2>
+        <p>MonKey is distributed exclusively through the <strong>Mac App Store</strong>. Every version is reviewed by Apple before release. The app runs in Apple's sandbox with only two entitlements:</p>
+        <ul>
+            <li><strong>App Sandbox</strong> &mdash; restricts file and system access to the app's own container</li>
+            <li><strong>Network Client</strong> &mdash; allows outgoing HTTPS connections (used only by PRO features when you trigger them)</li>
+        </ul>
+        <p>No Full Disk Access, no file system access outside the sandbox, no background daemons.</p>
+
+        <h2>How MonKey Uses Keystrokes</h2>
+
+        <div class="highlight-box">
+            <h3 class="green">What MonKey does</h3>
+            <ul>
+                <li>Monitors keyboard events via macOS Accessibility to detect when you're typing in the wrong keyboard layout</li>
+                <li>Keeps only the current word and a small rolling buffer in memory &mdash; nothing more</li>
+                <li>Corrects mismatched text when you press a hotkey or automatically on Space (if enabled)</li>
+                <li>Learns from corrections you accept (stored locally as word pairs)</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3 class="red">What MonKey does NOT do</h3>
+            <ul>
+                <li>Does not log keystrokes to any file</li>
+                <li>Does not transmit keystrokes over the network</li>
+                <li>Does not capture input in secure text fields (passwords)</li>
+                <li>Does not run hidden processes or background daemons</li>
+                <li>Does not include analytics, telemetry, or crash reporting</li>
+                <li>Does not access camera, microphone, contacts, or location</li>
+            </ul>
+        </div>
+
+        <h2>Network Behavior</h2>
+        <table>
+            <tr><th>Tier</th><th>Network Activity</th></tr>
+            <tr><td>Free</td><td><strong>Zero</strong> network connections. All processing happens locally on your Mac. Updates are handled by the App Store.</td></tr>
+            <tr><td>PRO</td><td>HTTPS requests <strong>only</strong> when you explicitly trigger translation, grammar check, or AI Wizard on selected text. No background traffic.</td></tr>
+        </table>
+
+        <p>No data is ever sent in the background. No keystrokes or text are transmitted unless you explicitly trigger a PRO action on selected text.</p>
+
+        <h2>Data Flow</h2>
+        <table>
+            <tr><th>Data</th><th>Where It Goes</th><th>Stored?</th></tr>
+            <tr><td>Keystrokes</td><td>In-memory buffer only</td><td>No &mdash; never written to disk</td></tr>
+            <tr><td>Learned corrections</td><td>App sandbox container</td><td>Yes &mdash; only on your Mac</td></tr>
+            <tr><td>Settings</td><td>App sandbox container</td><td>Yes &mdash; only on your Mac</td></tr>
+            <tr><td>Selected text (PRO)</td><td>AI service over HTTPS</td><td>No &mdash; processed and discarded</td></tr>
+            <tr><td>Subscription status</td><td>Apple (App Store)</td><td>Managed by Apple &mdash; we don't store payment data</td></tr>
+        </table>
+
+        <h2>Verify It Yourself</h2>
+        <p>Don't take our word for it. Here are independent ways to verify MonKey's behavior:</p>
+
+        <div class="verify-card">
+            <h4>1. Network Monitor &mdash; Little Snitch or Lulu</h4>
+            <p>Install <a href="https://objective-see.org/products/lulu.html">Lulu</a> (free, by Objective-See) or <a href="https://obdev.at/products/littlesnitch/">Little Snitch</a> to monitor all network connections. On the free tier, MonKey produces <strong>zero</strong> outgoing connections.</p>
+        </div>
+
+        <div class="verify-card">
+            <h4>2. Objective-See ReiKey &mdash; Keyboard Tap Detection</h4>
+            <p><a href="https://objective-see.org/products/reikey.html">ReiKey</a> by security researcher Patrick Wardle detects keyboard event taps. It will correctly identify MonKey's keyboard monitoring &mdash; this is expected and required for layout autocorrection.</p>
+        </div>
+
+        <div class="verify-card">
+            <h4>3. Apple App Review</h4>
+            <p>Every version of MonKey passes Apple's App Store review process, which verifies sandboxing compliance, entitlement usage, and absence of private API usage.</p>
+        </div>
+
+        <div class="verify-card">
+            <h4>4. macOS Permissions</h4>
+            <p>MonKey requests only <strong>Accessibility</strong> permission. No camera, microphone, contacts, location, or Full Disk Access. Verify in System Settings &rarr; Privacy &amp; Security &rarr; Accessibility.</p>
+        </div>
+
+        <h2>The Technology</h2>
+        <p>MonKey uses standard macOS APIs for keyboard monitoring, language detection, and text processing &mdash; the same kind of APIs used by other legitimate keyboard and text tools like Karabiner-Elements, TextExpander, Grammarly, and PopClip. The free tier uses only Apple's built-in frameworks. PRO features connect to cloud AI services over HTTPS when explicitly triggered by the user.</p>
+
+        <h2>Local Data Storage</h2>
+        <p>All app data is stored inside MonKey's sandbox container:</p>
+        <ul>
+            <li><code>~/Library/Containers/com.pearproduction.MonKey/Data/Library/Application Support/</code></li>
+        </ul>
+        <p>Nothing is synced to any cloud. Uninstalling the app from the App Store removes all sandboxed data automatically.</p>
+
+        <h2>Report a Vulnerability</h2>
+        <p>If you discover a security issue, please report it responsibly:</p>
+        <ul>
+            <li>Email: <a href="mailto:hello@getmonkey.cc">hello@getmonkey.cc</a></li>
+            <li>Subject: <code>[SECURITY] Brief description</code></li>
+        </ul>
+        <p>We acknowledge reports within 48 hours and aim to fix critical issues within 7 days.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about security or privacy? <a href="mailto:hello@getmonkey.cc">hello@getmonkey.cc</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXGYQS69YM"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DXGYQS69YM');</script>
+    <title>MonKey — Автовиправлення розкладки, переклад та граматика для macOS</title>
+    <meta name="description" content="MonKey автоматично виправляє помилки розкладки клавіатури, перекладає текст, перевіряє граматику та виконує AI-дії — все з меню-бару. Безкоштовно для macOS.">
+
+    <!-- Canonical & Language Alternates -->
+    <link rel="canonical" href="https://getmonkey.cc/uk/">
+    <link rel="alternate" hreflang="en" href="https://getmonkey.cc/">
+    <link rel="alternate" hreflang="uk" href="https://getmonkey.cc/uk/">
+    <link rel="alternate" hreflang="x-default" href="https://getmonkey.cc/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://getmonkey.cc/uk/">
+    <meta property="og:title" content="MonKey — Автовиправлення розкладки, переклад та граматика для macOS">
+    <meta property="og:description" content="MonKey автоматично виправляє помилки розкладки клавіатури, перекладає текст, перевіряє граматику та виконує AI-дії — все з меню-бару. Безкоштовно для macOS.">
+    <meta property="og:image" content="https://getmonkey.cc/icon.png">
+    <meta property="og:site_name" content="MonKey">
+    <meta property="og:locale" content="uk_UA">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="MonKey — Автовиправлення розкладки, переклад та граматика для macOS">
+    <meta name="twitter:description" content="MonKey автоматично виправляє помилки розкладки клавіатури, перекладає текст, перевіряє граматику та виконує AI-дії — все з меню-бару. Безкоштовно для macOS.">
+    <meta name="twitter:image" content="https://getmonkey.cc/icon.png">
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="MonKey">
+    <meta name="theme-color" content="#DB6614">
+    <link rel="icon" type="image/png" href="../icon.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "MonKey",
+      "operatingSystem": "macOS 15+",
+      "applicationCategory": "UtilitiesApplication",
+      "description": "MonKey автоматично виправляє помилки розкладки клавіатури, перекладає текст, перевіряє граматику та виконує AI-дії — все з меню-бару.",
+      "url": "https://getmonkey.cc/uk/",
+      "downloadUrl": "https://github.com/simplpear/monkey-releases/releases/latest",
+      "image": "https://getmonkey.cc/icon.png",
+      "author": {
+        "@type": "Organization",
+        "name": "MonKey",
+        "url": "https://getmonkey.cc/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "name": "Безкоштовна версія",
+          "description": "Необмежене автовиправлення розкладки, 3 переклади/день (Apple на пристрої), 3 перевірки граматики/день"
+        },
+        {
+          "@type": "Offer",
+          "price": "3.99",
+          "priceCurrency": "USD",
+          "name": "MonKey PRO",
+          "description": "GPT-4o-mini переклад, LanguageTool граматика, AI Wizard",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "3.99",
+            "priceCurrency": "USD",
+            "billingDuration": "P1M"
+          }
+        }
+      ],
+      "featureList": [
+        "Автовиправлення розкладки клавіатури",
+        "Переклад тексту (55+ мов)",
+        "Перевірка граматики та стилю",
+        "AI Wizard — користувацькі AI-дії",
+        "100% офлайн у безкоштовній версії",
+        "Нуль телеметрії"
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @media (hover: hover) {
+            * { cursor: none; }
+            a, button, .download-btn { cursor: none; }
+        }
+        #banana-cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .top-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+        }
+        .top-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .top-nav a:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .top-nav a svg {
+            width: 18px;
+            height: 18px;
+        }
+        .top-nav .flag {
+            font-size: 18px;
+            line-height: 1;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Helvetica', sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            min-height: 100vh;
+        }
+        .hero {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+            text-align: center;
+        }
+        .icon-flip {
+            width: 128px;
+            height: 128px;
+            margin: 0 auto 32px;
+            perspective: 600px;
+        }
+        .icon-flip-inner {
+            width: 128px;
+            height: 128px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform-origin: 64px 64px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .icon-flip:hover .icon-flip-inner {
+            transform: rotateY(180deg);
+        }
+        .icon-flip-front,
+        .icon-flip-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 128px;
+            height: 128px;
+            object-fit: cover;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 28px;
+        }
+        .icon-flip-back {
+            transform: rotateY(180deg);
+        }
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+        h1 span { color: #DB6614; }
+        .tagline {
+            font-size: 20px;
+            color: #999;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 56px;
+            background: linear-gradient(135deg, #DB6614, #e8822e, #DB6614);
+            background-size: 200% 200%;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 400;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 0 30px rgba(219, 102, 20, 0.3), 0 0 60px rgba(219, 102, 20, 0.15);
+            position: relative;
+            min-width: 320px;
+        }
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(219, 102, 20, 0.5), 0 0 80px rgba(219, 102, 20, 0.25);
+        }
+        .download-btn img {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(calc(-50% - 1px));
+            filter: brightness(0) invert(1);
+        }
+        .version {
+            margin-top: 12px;
+            font-size: 11px;
+            color: #555;
+        }
+
+        /* Features */
+        .section-title {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 24px 24px;
+            text-align: center;
+        }
+        .section-title h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .section-title p {
+            font-size: 15px;
+            color: #777;
+        }
+        .features {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .feature {
+            background: #151515;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 18px;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature:hover {
+            transform: translateY(-4px);
+            border-color: #DB6614;
+            box-shadow: 0 0 20px rgba(219, 102, 20, 0.15), 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .feature.wide {
+            grid-column: 1 / -1;
+        }
+        .feature h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .feature p {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* Feature cards with video — video on top, gradient fade, no padding */
+        .feature-video {
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .feature-video .video-wrap {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .feature-video video {
+            width: 100%;
+            display: block;
+        }
+        .feature-video .video-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #151515);
+            pointer-events: none;
+        }
+        .feature-video .feature-body {
+            padding: 14px 18px 18px;
+        }
+
+        .pro-badge {
+            display: inline-block;
+            background: #850AA1;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+        .free-badge {
+            display: inline-block;
+            background: #DB6614;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* Pricing */
+        .pricing {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 24px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: stretch;
+        }
+        .plan {
+            border-radius: 20px;
+            padding: 24px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .plan-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .plan-header-text {
+            text-align: left;
+        }
+        .plan-free {
+            background: #111;
+            border: 1px solid #1e1e1e;
+        }
+        .plan-free:hover {
+            transform: translateY(-4px);
+            border-color: #DB6614;
+            box-shadow: 0 0 20px rgba(219, 102, 20, 0.15), 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .plan-pro {
+            background: linear-gradient(160deg, #1c0a28, #120818);
+            border: 1px solid rgba(133, 10, 161, 0.4);
+            box-shadow: 0 0 40px rgba(133, 10, 161, 0.1), 0 0 80px rgba(133, 10, 161, 0.05);
+        }
+        .plan-pro:hover {
+            transform: translateY(-4px);
+            border-color: rgba(199, 125, 255, 0.6);
+            box-shadow: 0 0 30px rgba(133, 10, 161, 0.25), 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .plan-mascot {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            border-radius: 16px;
+            flex-shrink: 0;
+        }
+        .plan h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            color: #ccc;
+        }
+        .plan .price {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+        .plan .price-note {
+            font-size: 11px;
+            color: #555;
+            margin-top: 2px;
+        }
+        .save-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            color: #c77dff;
+            background: rgba(133, 10, 161, 0.2);
+            padding: 2px 7px;
+            border-radius: 5px;
+            margin-left: 4px;
+        }
+        .plan-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #2a2a2a, transparent);
+            margin-bottom: 16px;
+        }
+        .plan-pro .plan-divider {
+            background: linear-gradient(to right, transparent, rgba(133, 10, 161, 0.3), transparent);
+        }
+        .plan ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+        .plan li {
+            font-size: 13px;
+            color: #888;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .plan li::before {
+            content: "";
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23DB6614' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .plan-pro li::before {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23c77dff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+        }
+
+        /* Steps */
+        .steps {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 0 24px 40px;
+            position: relative;
+        }
+        .step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            position: relative;
+            padding: 10px 0;
+        }
+        .step:first-child { padding-top: 0; }
+        .step:last-child { padding-bottom: 0; }
+        .step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 17.5px;
+            top: 36px;
+            bottom: -10px;
+            width: 1px;
+            background: #2a2a2a;
+        }
+        .step-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #0a0a0a;
+            border: 1.5px solid #DB6614;
+            color: #DB6614;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 12px rgba(219, 102, 20, 0.3), 0 0 24px rgba(219, 102, 20, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        .step-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f0f0f0;
+            margin-bottom: 4px;
+        }
+        .step-content p {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* Security trust block */
+        .trust {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+        .trust-box {
+            background: linear-gradient(135deg, #0d1a0d, #0a140a);
+            border: 1px solid #1a3a1a;
+            border-radius: 20px;
+            padding: 48px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .trust-box::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4ade80, transparent);
+            border-radius: 2px;
+        }
+        .trust-icon {
+            margin-bottom: 16px;
+        }
+        .trust-icon svg {
+            width: 48px;
+            height: 48px;
+        }
+        .trust-box h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f0f0f0;
+            margin-bottom: 10px;
+        }
+        .trust-box .trust-sub {
+            font-size: 15px;
+            color: #888;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            text-align: left;
+            margin-bottom: 28px;
+        }
+        .trust-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .trust-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4ade80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .trust-check svg {
+            width: 12px;
+            height: 12px;
+            fill: none;
+            stroke: #0a140a;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .trust-item h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 3px;
+        }
+        .trust-item p {
+            font-size: 12px;
+            color: #777;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .trust-badges img { height: 22px; }
+        .trust-link {
+            font-size: 13px;
+            color: #4ade80;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .trust-link:hover { color: #86efac; }
+        @media (max-width: 600px) {
+            .trust-grid { grid-template-columns: 1fr; }
+            .trust-box { padding: 32px 24px; }
+        }
+
+        .made-in {
+            text-align: center;
+            padding: 28px 24px;
+            font-size: 13px;
+            color: #555;
+        }
+        footer {
+            padding: 28px 24px;
+            border-top: 1px solid #1a1a1a;
+            font-size: 13px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-left img {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        .footer-nav {
+            display: flex;
+            gap: 16px;
+        }
+        footer a { color: #888; text-decoration: none; }
+        footer a:hover { color: #DB6614; }
+        @media (max-width: 600px) {
+            h1 { font-size: 32px; }
+            .tagline { font-size: 16px; }
+            .features, .pricing { grid-template-columns: 1fr; }
+            .plan-mascot { width: 72px; height: 72px; }
+            footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                text-align: center;
+            }
+            .footer-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="https://github.com/simplpear/monkey-releases" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#ccc"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
+        <a href="../" title="English"><span class="flag">&#x1F1EC;&#x1F1E7;</span></a>
+    </nav>
+    <div class="hero">
+        <div class="icon-flip">
+            <div class="icon-flip-inner">
+                <img src="../icon.png" alt="MonKey" class="icon-flip-front">
+                <img src="../icon-pro.png" alt="MonKey PRO" class="icon-flip-back">
+            </div>
+        </div>
+        <h1>Mon<span>Key</span></h1>
+        <p class="tagline">Автовиправлення. Переклад. Граматика. AI.<br>Все за одне натискання клавіатури.</p>
+        <a href="https://github.com/simplpear/monkey-releases/releases/latest" class="download-btn">
+            <img src="../apple.svg" alt="">
+            Завантажити для macOS
+        </a>
+        <p class="version">Потрібна macOS 15+ &middot; Apple Silicon &amp; Intel</p>
+    </div>
+
+    <!-- Core Features -->
+    <div class="section-title">
+        <h2>Що робить MonKey</h2>
+        <p>Чотири інструменти для багатомовної продуктивності.</p>
+    </div>
+
+    <div class="features">
+        <div class="feature feature-video">
+            <div class="video-wrap">
+                <video autoplay loop muted playsinline>
+                    <source src="../Layout%20video.mp4" type="video/mp4">
+                </video>
+                <div class="video-fade"></div>
+            </div>
+            <div class="feature-body">
+                <h3>Автовиправлення розкладки <span class="free-badge">FREE</span></h3>
+                <p>Набрали текст не тією розкладкою? MonKey миттєво визначає невідповідність і замінює текст одним хоткеєм. Працює з українською, англійською, івритом та іншими.</p>
+            </div>
+        </div>
+        <div class="feature feature-video">
+            <div class="video-wrap">
+                <video autoplay loop muted playsinline>
+                    <source src="../Translate%20video.mp4" type="video/mp4">
+                </video>
+                <div class="video-fade"></div>
+            </div>
+            <div class="feature-body">
+                <h3>Переклад <span class="free-badge">FREE</span><span class="pro-badge">PRO</span></h3>
+                <p>Перекладайте виділений текст між 55+ мовами. Безкоштовна версія використовує переклад Apple на пристрої. PRO відкриває GPT-4o-mini з точністю до 40% вищою.</p>
+            </div>
+        </div>
+        <div class="feature feature-video">
+            <div class="video-wrap">
+                <video autoplay loop muted playsinline>
+                    <source src="../Grammar%20video.mp4" type="video/mp4">
+                </video>
+                <div class="video-fade"></div>
+            </div>
+            <div class="feature-body">
+                <h3>Граматика та стиль <span class="free-badge">FREE</span><span class="pro-badge">PRO</span></h3>
+                <p>Знаходьте граматичні, пунктуаційні та стилістичні помилки під час набору. Безкоштовна версія використовує перевірку macOS. PRO додає LanguageTool з 3x кращою точністю.</p>
+            </div>
+        </div>
+        <div class="feature feature-video">
+            <div class="video-wrap">
+                <video autoplay loop muted playsinline>
+                    <source src="../Wizard%20video.mp4" type="video/mp4">
+                </video>
+                <div class="video-fade"></div>
+            </div>
+            <div class="feature-body">
+                <h3>AI Помічник <span class="pro-badge">PRO</span></h3>
+                <p>Трансформуйте виділений текст за допомогою AI або миттєвих локальних інструментів — змінюйте тон, спрощуйте, підсумовуйте, конвертуйте регістр, транслітеруйте, сортуйте рядки або запускайте власний промпт.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="section-title">
+        <h2>Як це працює</h2>
+        <p>Три кроки. Без налаштувань. Без акаунтів.</p>
+    </div>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Просто друкуйте</h3>
+                <p>MonKey живе у вашому меню-барі та тихо стежить за клавіатурою. Він визначає невідповідність розкладки в реальному часі.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Виділіть текст</h3>
+                <p>Для перекладу, граматики чи AI-дій — виділіть потрібний текст. Для виправлення розкладки виділення не потрібне — MonKey запам'ятовує останній набраний текст.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h3>Натисніть хоткей</h3>
+                <p>Один хоткей — і готово. MonKey виправить розкладку, перекладе або перевірить граматику миттєво. Чим більше ви користуєтесь — тим точніше він працює.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="features" style="padding-top: 0;">
+        <div class="feature">
+            <div style="margin-bottom: 12px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DB6614" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <h3>Приватність за замовчуванням</h3>
+            <p>Безкоштовна версія працює повністю офлайн. Ваші натискання клавіш не покидають ваш Mac. Хмарні функції — тільки за вашим запитом.</p>
+        </div>
+        <div class="feature">
+            <div style="margin-bottom: 12px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DB6614" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg></div>
+            <h3>Контекстне розуміння</h3>
+            <p>MonKey відстежує контекст речень та вчиться з ваших виправлень. Чим більше ви користуєтесь — тим точніше визначення розкладки.</p>
+        </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="section-title">
+        <h2>Прості тарифи</h2>
+        <p>Базові функції безкоштовні назавжди. Для AI-магії — підписка.</p>
+    </div>
+
+    <div class="pricing">
+        <div class="plan plan-free">
+            <div class="plan-header">
+                <img src="../Site_freetir.png" alt="MonKey Free" class="plan-mascot">
+                <div class="plan-header-text">
+                    <h3>Безкоштовно</h3>
+                    <div class="price">$0</div>
+                    <div class="price-note">назавжди</div>
+                </div>
+            </div>
+            <div class="plan-divider"></div>
+            <ul>
+                <li>Необмежене автовиправлення розкладки</li>
+                <li>3 переклади/день (Apple на пристрої)</li>
+                <li>3 перевірки граматики/день (macOS)</li>
+                <li>Користувацькі хоткеї</li>
+                <li>6 мов інтерфейсу</li>
+                <li>100% офлайн — без акаунту</li>
+            </ul>
+        </div>
+        <div class="plan plan-pro">
+            <div class="plan-header">
+                <img src="../Site_premiumtir.png" alt="MonKey PRO" class="plan-mascot">
+                <div class="plan-header-text">
+                    <h3 style="color:#c77dff;">MonKey PRO</h3>
+                    <div class="price" style="color:#c77dff;">$3.99<span style="font-size:14px;font-weight:400;color:#777;">/міс</span></div>
+                    <div class="price-note">$39.99/рік <span class="save-badge">-17%</span></div>
+                    <div class="price-note">$59.99/2 роки <span class="save-badge">-37%</span></div>
+                </div>
+            </div>
+            <div class="plan-divider"></div>
+            <ul>
+                <li>Все з безкоштовної версії</li>
+                <li>Необмежений AI Cloud переклад (55+ мов)</li>
+                <li>Необмежена LanguageTool граматика &amp; стиль (3x точніше)</li>
+                <li>AI Помічник — власні дії з текстом</li>
+                <li>Контекстні AI-виправлення</li>
+                <li>Швидкість відповіді (&lt; 2с)</li>
+                <li>Скасування в будь-який час</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Security & Trust -->
+    <div class="trust">
+        <div class="trust-box">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="#4ade80" stroke-width="2"/></svg></div>
+            <h2>Ваші дані залишаються вашими</h2>
+            <p class="trust-sub">MonKey читає вашу клавіатуру для виправлення розкладки — не для шпигунства.<br>Ось як ми зберігаємо ваші дані в безпеці.</p>
+
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <span class="trust-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <div>
+                        <h4>Без логування натискань</h4>
+                        <p>Натискання обробляються в пам'яті та одразу видаляються. Нічого не записується на диск.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <div>
+                        <h4>Безкоштовна версія офлайн</h4>
+                        <p>Жодних мережевих з'єднань для обробки тексту. Єдиний запит — перевірка оновлень (тільки версія додатку).</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <div>
+                        <h4>Нуль телеметрії</h4>
+                        <p>Жодної аналітики, відстеження чи звітів про збої. Ми не знаємо, як ви використовуєте додаток.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <div>
+                        <h4>Хмара за запитом</h4>
+                        <p>AI-функції надсилають лише текст, який ви явно виділяєте. Жодного фонового збору даних.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <div>
+                        <h4>Сканування коду</h4>
+                        <p>Кожен коміт аналізується GitHub CodeQL на вразливості. Релізи скануються VirusTotal.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <div>
+                        <h4>Перевірте самі</h4>
+                        <p>Використовуйте Lulu або Little Snitch для моніторингу трафіку. ReiKey від Objective-See для перевірки клавіатурних перехоплень.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trust-badges">
+                <img src="https://img.shields.io/badge/Free_Tier-100%25_Offline-blue" alt="100% Offline">
+                <img src="https://img.shields.io/badge/Telemetry-None-4ade80?style=flat" alt="No Telemetry">
+                <img src="https://img.shields.io/badge/Keylogging-None-4ade80?style=flat" alt="No Keylogging">
+                <img src="https://img.shields.io/badge/CodeQL-Scanned-4ade80?logo=github&style=flat" alt="CodeQL">
+            </div>
+
+            <a href="../security.html" class="trust-link">Повна інформація про безпеку та методи верифікації &rarr;</a>
+        </div>
+    </div>
+
+    <img id="banana-cursor" src="../banana.png" alt="" style="display:none;">
+    <script>
+        if (window.matchMedia('(hover: hover)').matches) {
+            const bc = document.getElementById('banana-cursor');
+            document.addEventListener('mousemove', e => {
+                bc.style.left = e.clientX + 'px';
+                bc.style.top = e.clientY + 'px';
+                bc.style.display = 'block';
+            });
+            document.addEventListener('mouseleave', () => bc.style.display = 'none');
+            document.addEventListener('mouseenter', () => bc.style.display = 'block');
+        }
+    </script>
+
+    <div class="made-in">Зроблено в Україні з &#x2764;&#xFE0F;</div>
+
+    <footer>
+        <div class="footer-left">
+            <img src="../icon.png" alt="MonKey">
+            <span>&copy; 2026 MonKey</span>
+        </div>
+        <nav class="footer-nav">
+            <a href="../privacy.html">Конфіденційність</a>
+            <a href="../security.html">Безпека</a>
+            <a href="../terms.html">Умови</a>
+            <a href="../refund.html">Повернення</a>
+            <a href="mailto:hello@getmonkey.cc">Контакт</a>
+        </nav>
+    </footer>
+</body>
+</html>

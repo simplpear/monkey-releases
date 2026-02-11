@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXGYQS69YM"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DXGYQS69YM');</script>
+    <title>Privacy Policy — MonKey</title>
+    <meta name="description" content="MonKey privacy policy. Free tier is 100% offline — no data collection. Cloud features only process text you explicitly select.">
+    <link rel="canonical" href="https://getmonkey.cc/privacy.html">
+    <meta name="robots" content="index, follow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; color: #ccc; }
+        .content { max-width: 640px; margin: 0 auto; padding: 60px 24px; }
+        h1 { color: #f0f0f0; font-size: 28px; margin-bottom: 8px; }
+        .date { color: #666; font-size: 13px; margin-bottom: 40px; }
+        h2 { color: #f0f0f0; font-size: 18px; margin: 32px 0 12px; }
+        h3 { color: #e0e0e0; font-size: 15px; margin: 20px 0 8px; }
+        p, li { font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+        ul { padding-left: 20px; }
+        a { color: #DB6614; text-decoration: none; }
+        .back { display: inline-block; margin-bottom: 24px; color: #666; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { text-align: left; padding: 8px 12px; font-size: 13px; border-bottom: 1px solid #1a1a1a; }
+        th { color: #aaa; font-weight: 600; }
+        td { color: #888; }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <a href="/" class="back">&larr; Back to MonKey</a>
+        <h1>Privacy Policy</h1>
+        <p class="date">Last updated: February 2026</p>
+
+        <h2>What MonKey Does</h2>
+        <p>MonKey is a sandboxed macOS menu bar utility distributed through the Mac App Store. It provides four core functions: keyboard layout autocorrection, text translation, grammar checking, and custom AI actions (AI Wizard). It uses macOS Accessibility permission to detect layout mismatches and correct text.</p>
+
+        <h2>What Data MonKey Accesses</h2>
+
+        <h3>Keyboard Input</h3>
+        <p>MonKey monitors keystrokes via macOS Accessibility to detect keyboard layout mismatches. This monitoring happens entirely on your Mac. Keystroke data is processed in memory and never saved to disk or sent anywhere.</p>
+
+        <h3>Selected Text</h3>
+        <p>When you trigger a translation, grammar check, or AI Wizard action, MonKey reads the currently selected text in the active application. This text is used only for the requested operation.</p>
+
+        <h2>What Stays on Your Mac (Free Tier)</h2>
+        <p>The free tier processes everything locally. <strong>Zero network connections</strong> are made for:</p>
+        <ul>
+            <li><strong>Layout autocorrection</strong> &mdash; character mapping and dictionary lookup, fully offline</li>
+            <li><strong>Translation</strong> &mdash; Apple's on-device Translation framework (3 per day)</li>
+            <li><strong>Grammar check</strong> &mdash; macOS built-in spellchecker (3 per day)</li>
+        </ul>
+        <p>Your keystrokes, corrections, and text never leave your device. The free tier has absolutely no network activity. Updates are handled by the App Store.</p>
+
+        <h2>What Uses the Network (PRO Tier)</h2>
+        <p>PRO features send text you explicitly select to cloud services for processing:</p>
+
+        <table>
+            <tr><th>Feature</th><th>Service</th><th>Data Sent</th></tr>
+            <tr><td>AI Translation</td><td>Cloud AI (via secure proxy)</td><td>Selected text + language pair</td></tr>
+            <tr><td>Grammar &amp; Style</td><td>LanguageTool (via secure proxy)</td><td>Selected text + language</td></tr>
+            <tr><td>AI Wizard</td><td>Cloud AI (via secure proxy)</td><td>Selected text + your prompt</td></tr>
+        </table>
+
+        <ul>
+            <li>All requests are sent over HTTPS through our secure proxy server</li>
+            <li><strong>We do not store your text</strong> &mdash; it is processed in transit and discarded</li>
+            <li>No text is sent unless you explicitly trigger a PRO action</li>
+            <li>Third-party services have their own privacy policies</li>
+        </ul>
+
+        <h2>Learned Corrections</h2>
+        <p>MonKey learns from corrections you accept to reduce false suggestions over time. This learning data (word pairs and frequency counts) is stored locally in the app's sandbox container and never transmitted.</p>
+
+        <h2>Subscription &amp; Payment</h2>
+        <p>Subscriptions are managed entirely by <strong>Apple through the App Store</strong> and StoreKit. We never receive or store your payment details, billing address, or Apple ID. Apple's <a href="https://www.apple.com/legal/privacy/">privacy policy</a> governs all payment processing.</p>
+
+        <h2>Analytics &amp; Telemetry</h2>
+        <p>MonKey does not include any analytics, tracking, crash reporting, or telemetry. We have no way of knowing how you use the app.</p>
+
+        <h2>Local Data Storage</h2>
+        <p>All app data is stored inside MonKey's sandbox container:</p>
+        <ul>
+            <li><code>~/Library/Containers/com.pearproduction.MonKey/Data/Library/Application Support/</code></li>
+        </ul>
+        <p>Nothing is synced to any cloud. Uninstalling the app from the App Store removes all sandboxed data automatically.</p>
+
+        <h2>macOS Permissions</h2>
+        <table>
+            <tr><th>Permission</th><th>Why</th></tr>
+            <tr><td>Accessibility</td><td>Detect keyboard layout mismatches and correct text in apps</td></tr>
+        </table>
+        <p>MonKey runs in Apple's sandbox with only two entitlements: <strong>App Sandbox</strong> and <strong>Network Client</strong> (for PRO features). No camera, microphone, contacts, location, or Full Disk Access is requested or used.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about privacy? <a href="mailto:hello@getmonkey.cc">hello@getmonkey.cc</a></p>
+
+        <p style="margin-top: 24px; font-size: 13px; color: #555;">See also: <a href="security.html">Security &amp; Verification</a></p>
+    </div>
+</body>
+</html>
