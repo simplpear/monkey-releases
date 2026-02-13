@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXGYQS69YM"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DXGYQS69YM');</script>
+    <title>Безпека — MonKey</title>
+    <meta name="description" content="Безпека MonKey. Нуль телеметрії, без логування натискань, ізольований додаток App Store. Хмарний AI лише за явним запитом, офлайн резерв вбудовано.">
+    <link rel="canonical" href="https://getmonkey.cc/uk/security.html">
+    <meta name="robots" content="index, follow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; color: #ccc; }
+        .content { max-width: 640px; margin: 0 auto; padding: 60px 24px; }
+        h1 { color: #f0f0f0; font-size: 28px; margin-bottom: 8px; }
+        .subtitle { color: #888; font-size: 15px; margin-bottom: 40px; line-height: 1.6; }
+        h2 { color: #f0f0f0; font-size: 18px; margin: 36px 0 12px; }
+        h3 { color: #e0e0e0; font-size: 15px; margin: 20px 0 8px; }
+        p, li { font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+        ul { padding-left: 20px; }
+        a { color: #DB6614; text-decoration: none; }
+        .back { display: inline-block; margin-bottom: 24px; color: #666; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { text-align: left; padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #1a1a1a; }
+        th { color: #aaa; font-weight: 600; }
+        td { color: #888; }
+        code { background: #1a1a1a; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #ccc; }
+        .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0; }
+        .badge-row img { height: 24px; }
+        .highlight-box {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+        .highlight-box h3 { margin-top: 0; }
+        .green { color: #4ade80; }
+        .red { color: #f87171; }
+        .verify-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 12px 0;
+        }
+        .verify-card h4 {
+            color: #f0f0f0;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .verify-card p {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <a href="/uk/" class="back">&larr; Назад до MonKey</a>
+        <h1>Безпека та конфіденційність</h1>
+        <p class="subtitle">MonKey використовує дозвіл macOS Accessibility для виявлення невідповідностей розкладки клавіатури та виправлення тексту. Ми розуміємо, що це потребує довіри. Ось що робить додаток — і як ви можете перевірити це самостійно.</p>
+
+        <div class="badge-row">
+            <img src="https://img.shields.io/badge/App_Store-Sandboxed-blue?logo=apple" alt="App Store: Sandboxed">
+            <img src="https://img.shields.io/badge/Offline_Fallback-Built_In-blue" alt="Офлайн резерв: вбудовано">
+            <img src="https://img.shields.io/badge/Telemetry-None-brightgreen" alt="Без телеметрії">
+            <img src="https://img.shields.io/badge/Keylogging-None-brightgreen" alt="Без логування">
+        </div>
+
+        <h2>App Store та ізоляція</h2>
+        <p>MonKey розповсюджується виключно через <strong>Mac App Store</strong>. Кожна версія перевіряється Apple перед випуском. Додаток працює в ізольованому середовищі Apple з лише двома правами:</p>
+        <ul>
+            <li><strong>App Sandbox</strong> — обмежує доступ до файлів та системи контейнером додатку</li>
+            <li><strong>Network Client</strong> — дозволяє вихідні HTTPS-з'єднання (використовується для перекладу, граматики та AI Помічника коли ви їх запускаєте)</li>
+        </ul>
+        <p>Без повного доступу до диска, без доступу до файлової системи поза sandbox, без фонових демонів.</p>
+
+        <h2>Як MonKey використовує натискання клавіш</h2>
+
+        <div class="highlight-box">
+            <h3 class="green">Що MonKey робить</h3>
+            <ul>
+                <li>Моніторить події клавіатури через macOS Accessibility для виявлення набору тексту неправильною розкладкою</li>
+                <li>Зберігає в пам'яті лише поточне слово та невеликий буфер — нічого більше</li>
+                <li>Виправляє невідповідний текст при натисканні хоткея або автоматично при пробілі (якщо ввімкнено)</li>
+                <li>Вчиться на прийнятих виправленнях (зберігаються локально як пари слів)</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3 class="red">Що MonKey НЕ робить</h3>
+            <ul>
+                <li>Не логує натискання клавіш у файл</li>
+                <li>Не передає натискання клавіш через мережу</li>
+                <li>Не захоплює введення в захищених текстових полях (паролі)</li>
+                <li>Не запускає приховані процеси чи фонові демони</li>
+                <li>Не містить аналітики, телеметрії чи звітування про збої</li>
+                <li>Не має доступу до камери, мікрофона, контактів чи місцезнаходження</li>
+            </ul>
+        </div>
+
+        <h2>Мережева активність</h2>
+        <table>
+            <tr><th>Функція</th><th>Мережева активність</th></tr>
+            <tr><td>Виправлення розкладки</td><td><strong>Нуль</strong> мережевих з'єднань. Вся обробка відбувається локально на вашому Mac.</td></tr>
+            <tr><td>Переклад і граматика</td><td>HTTPS-запити <strong>лише</strong> коли ви явно їх запускаєте (Free: 2/день, PRO: необмежено). Без інтернету — автоматичний офлайн перехід на Apple Translation та перевірку macOS.</td></tr>
+            <tr><td>AI Помічник</td><td>HTTPS-запити при запуску (лише PRO). Без фонового трафіку.</td></tr>
+        </table>
+
+        <p>Жодні дані ніколи не надсилаються у фоновому режимі. Натискання клавіш та текст не передаються, поки ви явно не запустите переклад, перевірку граматики або AI Помічник на виділеному тексті.</p>
+
+        <h2>Потік даних</h2>
+        <table>
+            <tr><th>Дані</th><th>Куди потрапляють</th><th>Зберігаються?</th></tr>
+            <tr><td>Натискання клавіш</td><td>Тільки буфер у пам'яті</td><td>Ні — ніколи не записуються на диск</td></tr>
+            <tr><td>Вивчені виправлення</td><td>Контейнер sandbox додатку</td><td>Так — тільки на вашому Mac</td></tr>
+            <tr><td>Налаштування</td><td>Контейнер sandbox додатку</td><td>Так — тільки на вашому Mac</td></tr>
+            <tr><td>Виділений текст</td><td>AI-сервіс через HTTPS</td><td>Ні — обробляється і видаляється</td></tr>
+            <tr><td>Статус підписки</td><td>Apple (App Store)</td><td>Керується Apple — ми не зберігаємо платіжні дані</td></tr>
+        </table>
+
+        <h2>Перевірте самостійно</h2>
+        <p>Не вірте нам на слово. Ось незалежні способи перевірити поведінку MonKey:</p>
+
+        <div class="verify-card">
+            <h4>1. Монітор мережі — Little Snitch або Lulu</h4>
+            <p>Встановіть <a href="https://objective-see.org/products/lulu.html">Lulu</a> (безкоштовний, від Objective-See) або <a href="https://obdev.at/products/littlesnitch/">Little Snitch</a> для моніторингу всіх мережевих з'єднань. Виправлення розкладки не створює <strong>жодних</strong> вихідних з'єднань.</p>
+        </div>
+
+        <div class="verify-card">
+            <h4>2. Objective-See ReiKey — виявлення перехоплення клавіатури</h4>
+            <p><a href="https://objective-see.org/products/reikey.html">ReiKey</a> від дослідника безпеки Patrick Wardle виявляє перехоплення подій клавіатури. Він коректно ідентифікує моніторинг клавіатури MonKey — це очікувано і необхідно для автовиправлення розкладки.</p>
+        </div>
+
+        <div class="verify-card">
+            <h4>3. Перевірка Apple App Review</h4>
+            <p>Кожна версія MonKey проходить перевірку Apple App Store, яка верифікує відповідність sandbox, використання прав та відсутність приватних API.</p>
+        </div>
+
+        <div class="verify-card">
+            <h4>4. Дозволи macOS</h4>
+            <p>MonKey запитує лише дозвіл <strong>Accessibility</strong>. Без камери, мікрофона, контактів, місцезнаходження чи повного доступу до диска. Перевірте в Системні налаштування &rarr; Конфіденційність та безпека &rarr; Accessibility.</p>
+        </div>
+
+        <h2>Технологія</h2>
+        <p>MonKey використовує стандартні API macOS для моніторингу клавіатури, розпізнавання мови та обробки тексту — ті ж API, що й інші легітимні інструменти клавіатури та тексту як Karabiner-Elements, TextExpander, Grammarly та PopClip. Виправлення розкладки використовує тільки вбудовані фреймворки Apple. Хмарні функції підключаються до AI-сервісів через HTTPS коли ви їх явно запускаєте.</p>
+
+        <h2>Локальне зберігання даних</h2>
+        <p>Всі дані додатку зберігаються в контейнері sandbox MonKey:</p>
+        <ul>
+            <li><code>~/Library/Containers/com.pearproduction.MonKey/Data/Library/Application Support/</code></li>
+        </ul>
+        <p>Нічого не синхронізується з хмарою. Видалення додатку з App Store автоматично видаляє всі ізольовані дані.</p>
+
+        <h2>Повідомити про вразливість</h2>
+        <p>Якщо ви виявили проблему безпеки, будь ласка, повідомте відповідально:</p>
+        <ul>
+            <li>Email: <a href="mailto:hello@getmonkey.cc">hello@getmonkey.cc</a></li>
+            <li>Тема: <code>[SECURITY] Короткий опис</code></li>
+        </ul>
+        <p>Ми підтверджуємо отримання протягом 48 годин та прагнемо виправити критичні проблеми протягом 7 днів.</p>
+
+        <h2>Контакт</h2>
+        <p>Питання щодо безпеки чи конфіденційності? <a href="mailto:hello@getmonkey.cc">hello@getmonkey.cc</a></p>
+    </div>
+</body>
+</html>

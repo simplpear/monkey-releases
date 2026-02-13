@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXGYQS69YM"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DXGYQS69YM');</script>
+    <title>Політика конфіденційності — MonKey</title>
+    <meta name="description" content="Політика конфіденційності MonKey. Натискання клавіш не покидають ваш Mac. Переклад і граматика використовують хмарний AI лише за вашим запитом. Офлайн резерв вбудовано.">
+    <link rel="canonical" href="https://getmonkey.cc/uk/privacy.html">
+    <meta name="robots" content="index, follow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; color: #ccc; }
+        .content { max-width: 640px; margin: 0 auto; padding: 60px 24px; }
+        h1 { color: #f0f0f0; font-size: 28px; margin-bottom: 8px; }
+        .date { color: #666; font-size: 13px; margin-bottom: 40px; }
+        h2 { color: #f0f0f0; font-size: 18px; margin: 32px 0 12px; }
+        h3 { color: #e0e0e0; font-size: 15px; margin: 20px 0 8px; }
+        p, li { font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+        ul { padding-left: 20px; }
+        a { color: #DB6614; text-decoration: none; }
+        .back { display: inline-block; margin-bottom: 24px; color: #666; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { text-align: left; padding: 8px 12px; font-size: 13px; border-bottom: 1px solid #1a1a1a; }
+        th { color: #aaa; font-weight: 600; }
+        td { color: #888; }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <a href="/uk/" class="back">&larr; Назад до MonKey</a>
+        <h1>Політика конфіденційності</h1>
+        <p class="date">Останнє оновлення: лютий 2026</p>
+
+        <h2>Що робить MonKey</h2>
+        <p>MonKey — це ізольована (sandboxed) утиліта macOS для рядка меню, що розповсюджується через Mac App Store. Вона надає чотири основні функції: автовиправлення розкладки клавіатури, переклад тексту, перевірка граматики та власні AI-дії (AI Помічник). Використовує дозвіл Accessibility для виявлення невідповідностей розкладки та виправлення тексту.</p>
+
+        <h2>До яких даних MonKey має доступ</h2>
+
+        <h3>Введення з клавіатури</h3>
+        <p>MonKey моніторить натискання клавіш через macOS Accessibility для виявлення невідповідностей розкладки. Цей моніторинг відбувається повністю на вашому Mac. Дані натискань обробляються в пам'яті та ніколи не зберігаються на диск і нікуди не надсилаються.</p>
+
+        <h3>Виділений текст</h3>
+        <p>Коли ви запускаєте переклад, перевірку граматики або дію AI Помічника, MonKey зчитує поточний виділений текст в активному додатку. Цей текст використовується тільки для запитаної операції.</p>
+
+        <h2>Що залишається на вашому Mac</h2>
+        <p>Автовиправлення розкладки — <strong>100% офлайн</strong>. Маппінг символів та пошук у словниках відбуваються повністю на вашому Mac. Натискання клавіш обробляються в пам'яті та ніколи не зберігаються і не передаються.</p>
+
+        <h2>Що використовує мережу</h2>
+        <p>Переклад і перевірка граматики використовують хмарний AI для всіх користувачів (Free: 2/день, PRO: необмежено). Текст надсилається <strong>тільки коли ви явно запускаєте</strong> переклад, перевірку граматики або AI Помічник. Немає інтернету? MonKey автоматично перемикається на Apple Translation та перевірку macOS на вашому пристрої.</p>
+
+        <p>Хмарні запити надсилають текст, який ви явно виділяєте, на наш захищений проксі для обробки:</p>
+
+        <table>
+            <tr><th>Функція</th><th>Сервіс</th><th>Надіслані дані</th></tr>
+            <tr><td>AI Переклад</td><td>Хмарний AI (через захищений проксі)</td><td>Виділений текст + мовна пара</td></tr>
+            <tr><td>Граматика та стиль</td><td>LanguageTool (через захищений проксі)</td><td>Виділений текст + мова</td></tr>
+            <tr><td>AI Помічник</td><td>Хмарний AI (через захищений проксі)</td><td>Виділений текст + ваш промпт</td></tr>
+        </table>
+
+        <ul>
+            <li>Всі запити надсилаються через HTTPS через наш захищений проксі-сервер</li>
+            <li><strong>Ми не зберігаємо ваш текст</strong> — він обробляється в процесі передачі та видаляється</li>
+            <li>Жоден текст не надсилається, поки ви явно не запустите переклад, перевірку граматики або AI Помічник</li>
+            <li>Сторонні сервіси мають власні політики конфіденційності</li>
+        </ul>
+
+        <h2>Вивчені виправлення</h2>
+        <p>MonKey вчиться на виправленнях, які ви приймаєте, щоб зменшити хибні пропозиції з часом. Ці дані навчання (пари слів та лічильники частоти) зберігаються локально в контейнері sandbox додатку та ніколи не передаються.</p>
+
+        <h2>Підписка та оплата</h2>
+        <p>Підписками керує повністю <strong>Apple через App Store</strong> та StoreKit. Ми ніколи не отримуємо і не зберігаємо ваші платіжні дані, адресу виставлення рахунків або Apple ID. <a href="https://www.apple.com/legal/privacy/">Політика конфіденційності Apple</a> регулює всю обробку платежів.</p>
+
+        <h2>Аналітика та телеметрія</h2>
+        <p>MonKey не містить жодної аналітики, відстеження, звітування про збої або телеметрії. Ми не маємо способу дізнатися, як ви використовуєте додаток.</p>
+
+        <h2>Локальне зберігання даних</h2>
+        <p>Всі дані додатку зберігаються в контейнері sandbox MonKey:</p>
+        <ul>
+            <li><code>~/Library/Containers/com.pearproduction.MonKey/Data/Library/Application Support/</code></li>
+        </ul>
+        <p>Нічого не синхронізується з хмарою. Видалення додатку з App Store автоматично видаляє всі ізольовані дані.</p>
+
+        <h2>Дозволи macOS</h2>
+        <table>
+            <tr><th>Дозвіл</th><th>Навіщо</th></tr>
+            <tr><td>Accessibility</td><td>Виявлення невідповідностей розкладки та виправлення тексту в додатках</td></tr>
+        </table>
+        <p>MonKey працює в ізольованому середовищі Apple з двома правами: <strong>App Sandbox</strong> та <strong>Network Client</strong> (для хмарних функцій). Камера, мікрофон, контакти, місцезнаходження чи повний доступ до диску не запитуються і не використовуються.</p>
+
+        <h2>Контакт</h2>
+        <p>Питання щодо конфіденційності? <a href="mailto:hello@getmonkey.cc">hello@getmonkey.cc</a></p>
+
+        <p style="margin-top: 24px; font-size: 13px; color: #555;">Дивіться також: <a href="security.html">Безпека та верифікація</a></p>
+    </div>
+</body>
+</html>

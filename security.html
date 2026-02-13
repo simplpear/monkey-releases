@@ -74,7 +74,7 @@
         <p>MonKey is distributed exclusively through the <strong>Mac App Store</strong>. Every version is reviewed by Apple before release. The app runs in Apple's sandbox with only two entitlements:</p>
         <ul>
             <li><strong>App Sandbox</strong> &mdash; restricts file and system access to the app's own container</li>
-            <li><strong>Network Client</strong> &mdash; allows outgoing HTTPS connections (used only by PRO features when you trigger them)</li>
+            <li><strong>Network Client</strong> &mdash; allows outgoing HTTPS connections (used for translation, grammar, and AI Wizard when you trigger them)</li>
         </ul>
         <p>No Full Disk Access, no file system access outside the sandbox, no background daemons.</p>
 
@@ -118,7 +118,7 @@
             <tr><td>Keystrokes</td><td>In-memory buffer only</td><td>No &mdash; never written to disk</td></tr>
             <tr><td>Learned corrections</td><td>App sandbox container</td><td>Yes &mdash; only on your Mac</td></tr>
             <tr><td>Settings</td><td>App sandbox container</td><td>Yes &mdash; only on your Mac</td></tr>
-            <tr><td>Selected text (PRO)</td><td>AI service over HTTPS</td><td>No &mdash; processed and discarded</td></tr>
+            <tr><td>Selected text</td><td>AI service over HTTPS</td><td>No &mdash; processed and discarded</td></tr>
             <tr><td>Subscription status</td><td>Apple (App Store)</td><td>Managed by Apple &mdash; we don't store payment data</td></tr>
         </table>
 
@@ -146,7 +146,7 @@
         </div>
 
         <h2>The Technology</h2>
-        <p>MonKey uses standard macOS APIs for keyboard monitoring, language detection, and text processing &mdash; the same kind of APIs used by other legitimate keyboard and text tools like Karabiner-Elements, TextExpander, Grammarly, and PopClip. The free tier uses only Apple's built-in frameworks. PRO features connect to cloud AI services over HTTPS when explicitly triggered by the user.</p>
+        <p>MonKey uses standard macOS APIs for keyboard monitoring, language detection, and text processing &mdash; the same kind of APIs used by other legitimate keyboard and text tools like Karabiner-Elements, TextExpander, Grammarly, and PopClip. Layout autocorrection uses only Apple's built-in frameworks. Translation and grammar connect to cloud AI services over HTTPS when explicitly triggered by the user.</p>
 
         <h2>Local Data Storage</h2>
         <p>All app data is stored inside MonKey's sandbox container:</p>
