@@ -6,7 +6,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXGYQS69YM"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DXGYQS69YM');</script>
     <title>Security — MonKey</title>
-    <meta name="description" content="MonKey security overview. Zero telemetry, no keystroke logging, offline free tier. Sandboxed App Store app. Verify with Lulu, Little Snitch, or ReiKey.">
+    <meta name="description" content="MonKey security overview. Zero telemetry, no keystroke logging, sandboxed App Store app. Cloud AI only on explicit request, offline fallback built in.">
     <link rel="canonical" href="https://getmonkey.cc/security.html">
     <meta name="robots" content="index, follow">
     <style>
@@ -65,7 +65,7 @@
 
         <div class="badge-row">
             <img src="https://img.shields.io/badge/App_Store-Sandboxed-blue?logo=apple" alt="App Store: Sandboxed">
-            <img src="https://img.shields.io/badge/Free_Tier-100%25_Offline-blue" alt="Free Tier: 100% Offline">
+            <img src="https://img.shields.io/badge/Offline_Fallback-Built_In-blue" alt="Offline Fallback: Built In">
             <img src="https://img.shields.io/badge/Telemetry-None-brightgreen" alt="No Telemetry">
             <img src="https://img.shields.io/badge/Keylogging-None-brightgreen" alt="No Keylogging">
         </div>
@@ -105,11 +105,12 @@
         <h2>Network Behavior</h2>
         <table>
             <tr><th>Tier</th><th>Network Activity</th></tr>
-            <tr><td>Free</td><td><strong>Zero</strong> network connections. All processing happens locally on your Mac. Updates are handled by the App Store.</td></tr>
-            <tr><td>PRO</td><td>HTTPS requests <strong>only</strong> when you explicitly trigger translation, grammar check, or AI Wizard on selected text. No background traffic.</td></tr>
+            <tr><td>Layout correction</td><td><strong>Zero</strong> network connections. All processing happens locally on your Mac.</td></tr>
+            <tr><td>Translation &amp; Grammar</td><td>HTTPS requests <strong>only</strong> when you explicitly trigger them (Free: 2/day, PRO: unlimited). No internet &mdash; automatic offline fallback to Apple Translation and macOS spellcheck.</td></tr>
+            <tr><td>AI Wizard</td><td>HTTPS requests when triggered (PRO only). No background traffic.</td></tr>
         </table>
 
-        <p>No data is ever sent in the background. No keystrokes or text are transmitted unless you explicitly trigger a PRO action on selected text.</p>
+        <p>No data is ever sent in the background. No keystrokes or text are transmitted unless you explicitly trigger a translation, grammar check, or AI Wizard on selected text.</p>
 
         <h2>Data Flow</h2>
         <table>
